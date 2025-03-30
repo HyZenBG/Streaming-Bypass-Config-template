@@ -6,7 +6,7 @@ services:
     image: python:3.9-slim
     working_dir: /app
     volumes:
-      - .:/app
+      - clash_regen_vol:/app
     ports:
       - "5000:5000"
     command: >
