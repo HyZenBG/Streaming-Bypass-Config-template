@@ -10,7 +10,7 @@ services:
     ports:
       - "5000:5000"
     command: >
-      sh -c "pip install --no-cache-dir flask pyyaml gunicorn && gunicorn -b 0.0.0.0:5000 main:app"
+      sh -c "pip install --no-cache-dir flask pyyaml gunicorn && gunicorn -w 4 -b 0.0.0.0:5000 main:app"
     restart: unless-stopped
     environment:
       - PYTHONUNBUFFERED=1
