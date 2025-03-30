@@ -3,6 +3,8 @@ services:
     container_name: clash-config-generator
     image: python:3.9-slim
     working_dir: /app
+    volumes:
+      - .:/app
     ports:
       - "5000:5000"
     command: >
