@@ -8,7 +8,7 @@ services:
     ports:
       - "5000:5000"
     command: >
-      sh -c "pip install --no-cache-dir flask pyyaml gunicorn && python main.py"
+      sh -c "ls"
     restart: unless-stopped
     environment:
       - PYTHONUNBUFFERED=1
