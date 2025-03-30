@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   clash-config-generator:
     container_name: clash-config-generator
@@ -8,7 +10,7 @@ services:
     ports:
       - "5000:5000"
     command: >
-      sh -c "cd && ls && pip install flask pyyaml && python main.py"
+      sh -c "pip install --no-cache-dir flask pyyaml gunicorn && gunicorn -b 0.0.0.0:5000 main:app"
     restart: unless-stopped
     environment:
       - PYTHONUNBUFFERED=1
