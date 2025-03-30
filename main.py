@@ -77,24 +77,126 @@ def generate_yaml():
         return data, 500
     
     return Response(yaml.dump(data), mimetype='text/yaml')
+@app.route('/generators', methods=['GET'])
+def generators():
+    encrypted_vmess = request.args.get('vmess')
+    return render_template_string("""
+<html>
+<head>
+    <title>Clash Config Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            display: block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 18px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Clash Config Generator</h1>
+    <div class="container">
+        <h2>Open with Clash</h2>
+        <a href="clash://install-config?url={{url_for('generate_yaml', _external=true, vmess=encrypted_vmess)}}">Open with Clash</a>
+        <h2>Download YAML</h2>
+        <a href="{{url_for('generate_yaml', _external=True, vmess=encrypted_vmess)}}">Download YAML</a>
+    </div>        
+</body>
+</html>
+""", encrypted_vmess=encrypted_vmess)
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template_string('''
-    <html>
-    <head>
-        <title>Clash Config Generator</title>
-    </head>
-    <body>
-        <h1>Clash Config Generator</h1>
-        <form action="/generate_yaml" method="get">
-            <label for="vmess">VMess:</label>
-            <input type="text" id="vmess" name="vmess" required>
-            <button type="submit">Generate YAML</button>
-        </form>
-    </body>
-    </html>
-    ''')
+    return render_template_string("""
+<html>
+<head>
+    <title>Clash Config Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        form {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            display: block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 18px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Clash Config Generator</h1>
+    <form action="/generators" method="get">
+        <label for="vmess">VMess:</label>
+        <input type="text" id="vmess" name="vmess" required>
+        <button type="submit">Generate YAML</button>
+    </form>
+</body>
+</html>
+"""
+)
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
