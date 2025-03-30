@@ -45,7 +45,7 @@ def update_conf(decoded, yaml_file):
         return server_ip
     
     for proxy in yaml_file.get('proxies', []):
-        proxy['name'] = proxy.get('name') + ' - ' + config_name.replace(' ', '')
+        proxy['name'] = proxy.get('name') + ' - ' + config_name
         proxy['uuid'] = user_id
         proxy['server'] = server_ip
         proxy['port'] = port
