@@ -5,8 +5,6 @@ services:
     container_name: clash-config-generator
     image: python:3.9-slim
     working_dir: /app
-    volumes:
-      - clash_regen_vol:.
     ports:
       - "5000:5000"
     command: >
@@ -15,6 +13,4 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
 
-volumes:
-  clash_regen_vol:
 
