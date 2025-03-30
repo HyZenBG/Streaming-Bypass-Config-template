@@ -8,9 +8,9 @@ services:
     ports:
       - "5000:5000"
     command: >
-      bash -c "ls" &&
-      bash -c "pip install flask pyyaml" &&
-      bash -c "python main.py"
+      sh -c "ls" &&
+      sh -c "pip install flask pyyaml" &&
+      sh -c "python main.py"
     restart: unless-stopped
     environment:
       - PYTHONUNBUFFERED=1
