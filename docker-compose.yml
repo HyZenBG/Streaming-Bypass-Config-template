@@ -2,13 +2,13 @@ services:
   clash-config-generator:
     container_name: clash-config-generator
     image: python:3.9-slim
-    working_dir: /app
+    working_dir: /
     volumes:
-      - .:/app
+      - .:/
     ports:
       - "5000:5000"
     command: >
-      sh -c "pip install --no-cache-dir flask pyyaml && python main.py"
+      sh -c "pip install --no-cache-dir flask pyyaml && gunicorn -b 0.0.0.0:5000 main:app"
     restart: unless-stopped
     environment:
       - PYTHONUNBUFFERED=1
