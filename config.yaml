@@ -5,7 +5,7 @@ log-level: silent
 ipv6: true
 
 proxies:
-  - name: LIMITLESS STREAMING GP
+  - name: GP STREAMING
     type: vmess
     server: 
     port: 
@@ -20,7 +20,7 @@ proxies:
       headers:
         Host: "www.youtube.com"
   
-  - name: LIMITLESS SOCIAL GP
+  - name: GP SOCIAL
     type: vmess
     server: 
     port: 
@@ -33,9 +33,9 @@ proxies:
     ws-opts:
       path: "/vmess"
       headers:
-        Host: "www.youtube.com"
+        Host: "www.instagram.com"
   
-  - name: LIMITLESS STREAMING ROBI
+  - name: ROBI STREAMING
     type: vmess
     server: 
     port: 
@@ -48,9 +48,9 @@ proxies:
     ws-opts:
       path: "/vmess"
       headers:
-        Host: "www.youtube.com"
+        Host: "www.snapchat.com"
 
-  - name: LIMITLESS STREEAMING BL
+  - name: ROBI SOCIAL
     type: vmess
     server: 
     port: 4442
@@ -63,17 +63,17 @@ proxies:
     ws-opts:
       path: "/vmess"
       headers:
-        Host: "www.youtube.com"
+        Host: "www.instagram.com"
         
 proxy-groups:
   - name: BDCLOUD
     type: select
     proxies:
       - DIRECT
-      - LIMITLESS STREAMING GP
-      - LIMITLESS SOCIAL GP
-      - LIMITLESS STREAMING ROBI
-      - LIMITLESS STREEAMING BL
+      - GP STREAMING
+      - GP SOCIAL
+      - ROBI STREAMING
+      - ROBI SOCIAL
 
 rules:
   #  - SCRIPT,NULLDNS,REJECT 

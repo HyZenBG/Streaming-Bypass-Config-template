@@ -45,7 +45,7 @@ def update_conf(decoded, yaml_file):
         return server_ip
     
     for proxy in yaml_file.get('proxies', []):
-        proxy['name'] = proxy.get('name') + ' - ' + config_name
+        proxy['name'] = proxy.get('name')
         proxy['uuid'] = user_id
         proxy['server'] = server_ip
         proxy['port'] = port
@@ -54,8 +54,10 @@ def update_conf(decoded, yaml_file):
     for group in yaml_file.get('proxy-groups', []):
         
         for i in range(1, len(group['proxies'])):
-            group['proxies'][i] = group['proxies'][i] + ' - ' + config_name
-    
+            group['name'] = f'BDCLOUD {config_name}'
+            group['proxies'][i] = group['proxies'][i]
+    #update rules with config_name variable
+    yaml_file['rules'] = [rule.replace('BDCLOUD', f'BDCLOUD {config_name}') for rule in yaml_file['rules']]
     return yaml_file
 
 @app.route('/generate_yaml', methods=['GET'])
